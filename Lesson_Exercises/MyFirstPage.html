@@ -1,0 +1,99 @@
+<html>
+
+<head>
+</head>
+
+<body>
+    <div>
+        <h1 id="welcome"> Welcome, Test Subject!</h1>
+        <p class="textJohnson">Welcome, gentlemen, to Aperture Science. Astronauts, war heroes, Olympians -- you're here because we want the best, and you are it. So: Who is ready to make some science?</p>
+    </div>
+
+    <div class="inputFields" style="margin: 1%;">
+        <input id="nameInput" type="text" placeholder="Name">
+        <button id="nameButton" onclick="fillForm()"> Submit </button>
+        <br>
+        <input id="occupation" type="text" placeholder="Occupation">
+    </div>
+
+    <div class="outputFields">
+        <p id="output1"></p>
+    </div>
+    
+    <div>
+        <img id="johnsonPortrait" src="https://cdn.discordapp.com/attachments/789615526846267392/1103999230961532948/Cave_Johnson_Painting_3.png">
+    </div>
+    
+</body>
+
+<style>
+    .outputFields{
+        background-color: aliceblue;
+        width: 200px;
+        height: 100px;
+        margin: 1%;
+        text-align: left;
+        padding: 1%;
+        
+    }
+
+    #johnsonPortrait{
+        border: 5px solid rgb(86, 44, 24);
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 30%;
+        margin-top: 30px;
+    }
+
+    .textJohnson{
+        margin-top: 1%;
+        margin-bottom: 5%;
+        margin-left: 5%;
+        margin-right: 5%;
+        padding: 2%;
+        border: solid 2px brown;
+        background-color: beige;
+        font-family: 'Georgia';
+        font-size: 16pt;
+        border-radius: 20px;
+    }
+
+    #welcome{
+        text-align: center;
+        font-family: 'Brush Script MT', cursive;
+        font-size: 60pt;
+        color: rgb(237, 200, 89);
+    }
+
+    body{
+        background-image: url(https://cdn.discordapp.com/attachments/789615526846267392/1103990172313464873/d3k1wd3-ab03ad6e-ef40-4029-bcf8-96e167d981e5.jpg);
+        background-position: top center;
+        
+    }
+
+</style>
+
+<script>
+    function fillForm(){
+        var name = document.getElementById("nameInput").value;
+        var vierkant = document.getElementById("output1");
+        var occup = document.getElementById("occupation").value;
+
+        if (occup === ""){
+            occup = "<em>None</em>"
+        }
+
+        output = name+" with occupation "+occup
+
+        if (name.toLowerCase() == "johnson"){
+            vierkant.innerHTML = "Johnson? That's the best name!";
+        } else{
+            vierkant.innerHTML = output;
+        }
+    }
+
+
+</script>
+
+</html>
