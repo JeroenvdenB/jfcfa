@@ -1,0 +1,26 @@
+<html>
+    <body>
+        <p>
+            <b><em>Opdracht 1</em></b><br>
+            Voer hallo of doei in voor een bijbehorende popup.<br>
+            In andere gevallen gebeurd er niets.
+        </p>
+        <label for="groet">Groet:</label>
+        <input type="text" id="groet"><br><br>
+        <input type="button" value="submit" id="submitButton" onclick="respond()">
+    </body>
+
+    <script>
+        function respond(){
+            let a = document.getElementById("groet").value;
+            switch(a){
+                case "hallo":
+                    alert("Welkom!");
+                    break;
+                case "doei":
+                    alert("Tot de volgende keer");
+                    break;
+            }
+        }
+    </script>
+</html>

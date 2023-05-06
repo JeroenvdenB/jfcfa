@@ -1,0 +1,66 @@
+<html>
+    <body>
+        <p>
+            <b><em>Opdracht 3</em></b><br>
+            <ul id="exerciseList">
+                <li>Maak 4 knoppen naast elkaar; A t/m D.</li>
+                <li>Op het moment dat je op een knop klikt, verschijnt dat in een div.</li>
+                <li>Klik op een ander, en deze verschijnt ook. Log de geschiedenis in de div.</li>
+                <li>Klik op dezelfde knop en krijge een alert. Het word wel gelogd in de div.</li>
+                <li>Advanced: De alert vertelt ook hoe vaak je al hebt geklikt.</li>
+            </ul>
+        </p>
+        <div id="buttons">
+            <button onclick="respond('A')">A</button>
+            <button onclick="respond('B')">B</button>
+            <button onclick="respond('C')">C</button>
+            <button onclick="respond('D')">D</button>
+        </div>
+        <div>
+            <p id="out"></p>
+        </div>
+    </body>
+
+    <style>
+        #exerciseList{
+            list-style-position: inside;
+            list-style-type: square;
+            color:  #2e4053;
+        }
+        #buttons{
+            margin: 2%;
+        }
+        #out{
+            margin: 2%;
+            border: 2px solid black;
+            padding: 5px;
+            padding-left: 10px;
+        }
+    </style>
+
+    <script>
+
+        function respond(input){
+            //Fetch the current output field content
+            let t = document.getElementById("out");
+
+            //Add new line to it
+            wr = t.innerHTML+"U heeft op knop "+input+" geklikt.<br>";
+            t.innerHTML = wr;
+
+            //Count how many times the input letter occurs in the text. 
+            //The capital A through D are not used in the output text elsewhere.
+            count = 0;
+            for (var i = 0; i < wr.length; i++){
+                if (wr[i] == input){
+                    count ++;
+                }
+            }
+            count--;
+            if (count != 0){
+                alert("U heeft al "+count+" keer eerder op "+input+" gedrukt.");
+            }
+            
+        }
+    </script>
+</html>

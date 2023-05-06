@@ -1,0 +1,43 @@
+<html>
+    <body>
+        <p>
+            <b><em>Opdracht 3</em></b><br>
+            <ul id="exerciseList">
+                <li>Maak twee tekst-invoervelden en een knop.</li>
+                <li>In het eerste veld kan ik een woord typen.</li>
+                <li>In het tweede veld kan ik een letter typen.</li>
+                <li>De knop laat verschijnen hoe vaak de letter in het woord zit.</li>
+            </ul> <br>
+        </p>
+        <label for="woord">Woord:</label>
+        <input type="text" id="woord"><br>
+        <label for="letter">Letter:</label>
+        <input type="text" id="letter"> <br> <br>
+        <input type="button" value="submit" id="submitButton" onclick="respond()">
+    </body>
+
+    <style>
+        #exerciseList{
+            list-style-position: inside;
+            list-style-type: square;
+            color:  #2e4053;
+        }
+    </style>
+
+    <script>
+        function respond(){
+            //woord en gevraagde letter bepalen
+            let w = document.getElementById("woord").value;
+            let l = document.getElementById("letter").value;
+            let count = 0;
+
+
+            for (var i = 0; i < w.length; i++){
+                if (w[i] == l){
+                    count ++
+                }
+            }
+            alert("Er zit "+count+" keer de letter "+l+" in het woord "+w)
+        }
+    </script>
+</html>
