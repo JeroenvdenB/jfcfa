@@ -12,8 +12,9 @@
             </ul>
         </p>
 
-        <div class="afbeeldingen">
-            <img id="seasonImage" src="spring.jpg" width="500" onclick="changeSeason()">
+        <div id="afbeeldingen">
+            <img id="seasonImage" src="spring.jpg" width="500" onclick="changeSeason()"> 
+            <img id="lammetje" src="https://cdn.discordapp.com/attachments/789615526846267392/1105066448604381274/lamb.jpg" width="500px">
         </div>
     </body>
 
@@ -23,18 +24,50 @@
             list-style-type: square;
             color:  #2e4053;
         }
-        .afbeeldingen{
+        #afbeeldingen{
             margin: 2%;
         }
     </style>
 
     <script>
         //Let's see if I can do global variables
-        var season = 0;
+        var press = 0;
+        var year = 0;
+        var season = "";
+        var spring = "https://cdn.discordapp.com/attachments/789615526846267392/1105053636779851837/spring.jpg";
+        var summer = "https://cdn.discordapp.com/attachments/789615526846267392/1105053637543202926/summer.jpg";
+        var fall = "https://cdn.discordapp.com/attachments/789615526846267392/1105053636448493599/fall.jpeg";
+        var winter = "https://cdn.discordapp.com/attachments/789615526846267392/1105053637895528469/winter.jpg";
+        var lamb = "https://cdn.discordapp.com/attachments/789615526846267392/1105066448604381274/lamb.jpg";
+        var lambrack = "https://cdn.discordapp.com/attachments/789615526846267392/1105066448986046574/lambrack.jpg";
+  
 
         function changeSeason(){
-            //Determine the season
-
+            let im = document.getElementById("seasonImage");
+            let la = document.getElementById("lammetje");
+            switch(press){
+                case 0:
+                    im.src = summer;
+                    la.src = lambrack;
+                    press++;
+                    break;
+                case 1:
+                    im.src = fall;
+                    press++;
+                    break;
+                case 2:
+                    im.src = winter;
+                    press++;
+                    break;
+                case 3:
+                    im.src = spring;
+                    la.src = lamb;
+                    press = 0;
+                    year++;
+                    alert("Er is "+year+" jaar voorbij.");
+                    break;
+            }
+            console.log(press, year);
         } //No need to return, since the variable is global
 
     </script>
