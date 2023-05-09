@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+    <body>
+
+        <div class="introduction">
+            <h1>Connect Four</h1>
+            <p>Instructions go here?</p>
+        </div>
+
+        <!--Two fields to give player names, with defaults, and a button to start-->
+        <!--Field that shows whose turn it is-->
+
+        <div class ="gameField">
+            <div class="column" id="c1" onclick="clicked(0)"><span></span></div>
+            <div class="column" id="c2" onclick="clicked(1)"><span></span></div>
+            <div class="column" id="c3" onclick="clicked(2)"><span></span></div>
+            <div class="column" id="c4" onclick="clicked(3)"><span></span></div>
+            <div class="column" id="c5" onclick="clicked(4)"><span></span></div>
+            <div class="column" id="c6" onclick="clicked(5)"><span></span></div>
+            <div class="column" id="c7" onclick="clicked(6)"><span></span></div>
+
+            <table id="myTable">
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        
+        <style>
+            th, td{
+                width: 25px;
+                height: 25px;
+                border: 2px solid black;
+            }
+            table{
+                margin: 20px;
+                border-spacing: 5px;
+            }
+
+            div#c1{
+                position: absolute;
+                height: 204px;
+                left: 34px;
+                top: 125px;
+                width: 28px;
+            }
+
+            div#c2{
+                position: absolute;
+                height: 204px;
+                left: 69px;
+                top: 125px;
+                width: 28px;
+            }
+          
+            div#c3{
+                position: absolute;
+                height: 204px;
+                left: 105px;
+                top: 125px;
+                width: 28px;
+            }
+       
+            div#c4{
+                position: absolute;
+                height: 204px;
+                left: 140px;
+                top: 125px;
+                width: 28px;
+            }
+       
+            div#c5{
+                position: absolute;
+                height: 204px;
+                left: 174px;
+                top: 125px;
+                width: 28px;
+            }
+        
+            div#c6{
+                position: absolute;
+                height: 204px;
+                left: 210px;
+                top: 125px;
+                width: 28px;
+            }
+        
+            div#c7{
+                position: absolute;
+                height: 204px;
+                left: 245px;
+                top: 125px;
+                width: 28px;
+            }
+
+            div.column:hover{
+                background-color: rgba(100, 100, 100, 0.4) ;
+            }
+
+        </style>
+
+        <script>
+            var numberOfRows = document.getElementById("myTable").rows.length; //6
+            var numberOfColumns = document.getElementById("myTable").rows[0].cells.length; //7
+            var stonesLimit=[0, 0, 0, 0, 0, 0, 0];
+            var turn = 0;
+
+
+            function clicked(col){
+                rowNr = numberOfRows - stonesLimit[col] -1;
+                let x = document.getElementById("myTable").rows[rowNr].cells[col];
+                
+                //Check whose turn it is
+                if (turn % 2 == 0){
+                    console.log("the turn is even"); //Implement two colors for players here
+                } else{
+                    console.log("The turn is odd");
+                }
+                
+                turn ++;
+                x.style.backgroundColor = "blue"; //Remove this when color implement above is done
+                stonesLimit[col]++;
+
+                //Check if one of the columns is full
+                if (stonesLimit[col] == 6){
+                    //Disable the column div here so it can no longer be clicked
+                }
+
+                //Check if there is a winner after this?
+            }
+        </script>
+    </body>
+</html>
