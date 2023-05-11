@@ -4,20 +4,23 @@
 
         <div class="introduction">
             <h1>Connect Four</h1>
-            <p>Instructions go here?</p>
         </div>
 
-        <!--Two fields to give player names, with defaults, and a button to start-->
-        <!--Field that shows whose turn it is-->
+        <label for="player1">Player 1:</label>
+        <input type="text" id="player1" value="Blue"><br>
+        <label for="player2">Player 2:</label>
+        <input type="text" id="player2" value="Red"><br><br>
+        <button id="playbutton" onclick="setPlayer()">Play</button><br><br>
+        <div><span id="whoseturn">Enter player names and press play!</span></div>
 
         <div class ="gameField">
-            <div class="column" id="c1" onclick="clicked(0)"><span></span></div>
-            <div class="column" id="c2" onclick="clicked(1)"><span></span></div>
-            <div class="column" id="c3" onclick="clicked(2)"><span></span></div>
-            <div class="column" id="c4" onclick="clicked(3)"><span></span></div>
-            <div class="column" id="c5" onclick="clicked(4)"><span></span></div>
-            <div class="column" id="c6" onclick="clicked(5)"><span></span></div>
-            <div class="column" id="c7" onclick="clicked(6)"><span></span></div>
+            <div class="column" id="c0" onclick="clicked(0)"><span></span></div>
+            <div class="column" id="c1" onclick="clicked(1)"><span></span></div>
+            <div class="column" id="c2" onclick="clicked(2)"><span></span></div>
+            <div class="column" id="c3" onclick="clicked(3)"><span></span></div>
+            <div class="column" id="c4" onclick="clicked(4)"><span></span></div>
+            <div class="column" id="c5" onclick="clicked(5)"><span></span></div>
+            <div class="column" id="c6" onclick="clicked(6)"><span></span></div>
 
             <table id="myTable">
                 <tr>
@@ -88,64 +91,64 @@
                 border-spacing: 5px;
             }
 
-            div#c1{
+            div#c0{
                 position: absolute;
                 height: 204px;
                 left: 34px;
-                top: 125px;
+                top: 224px;
                 width: 28px;
             }
 
-            div#c2{
+            div#c1{
                 position: absolute;
                 height: 204px;
                 left: 69px;
-                top: 125px;
+                top: 224px;
                 width: 28px;
             }
           
-            div#c3{
+            div#c2{
                 position: absolute;
                 height: 204px;
                 left: 105px;
-                top: 125px;
+                top: 224px;
+                width: 28px;
+            }
+       
+            div#c3{
+                position: absolute;
+                height: 204px;
+                left: 139px;
+                top: 224px;
                 width: 28px;
             }
        
             div#c4{
                 position: absolute;
                 height: 204px;
-                left: 140px;
-                top: 125px;
+                left: 174px;
+                top: 224px;
                 width: 28px;
             }
-       
+        
             div#c5{
                 position: absolute;
                 height: 204px;
-                left: 174px;
-                top: 125px;
+                left: 209px;
+                top: 224px;
                 width: 28px;
             }
         
             div#c6{
                 position: absolute;
                 height: 204px;
-                left: 210px;
-                top: 125px;
-                width: 28px;
-            }
-        
-            div#c7{
-                position: absolute;
-                height: 204px;
                 left: 245px;
-                top: 125px;
+                top: 224px;
                 width: 28px;
             }
 
             div.column:hover{
-                background-color: rgba(100, 100, 100, 0.4) ;
+                background-color: rgba(100, 100, 100, 0.4);
             }
 
         </style>
@@ -153,32 +156,80 @@
         <script>
             var numberOfRows = document.getElementById("myTable").rows.length; //6
             var numberOfColumns = document.getElementById("myTable").rows[0].cells.length; //7
-            var stonesLimit=[0, 0, 0, 0, 0, 0, 0];
+            var boardState=["", "", "", "", "", "", ""];
             var turn = 0;
+            var playColor = "blue";
+            var winner = "noone";
+            var player1 = document.getElementById("player1").value;
+            var player2 = document.getElementById("player2").value;
 
+            function setPlayer(){
+                //Check whose turn it is
+                player1 = document.getElementById("player1").value;
+                player2 = document.getElementById("player2").value;
+                if (turn % 2 == 0){
+                    currentplayer = player1;
+                    playColor = "blue";
+                } else{
+                    currentplayer = player2;
+                    playColor = "red";
+                }
+                document.getElementById("whoseturn").innerHTML = "It is "+currentplayer+"\'s turn";
+            }
 
             function clicked(col){
-                rowNr = numberOfRows - stonesLimit[col] -1;
+                rowNr = numberOfRows - boardState[col].length -1;
                 let x = document.getElementById("myTable").rows[rowNr].cells[col];
                 
-                //Check whose turn it is
-                if (turn % 2 == 0){
-                    console.log("the turn is even"); //Implement two colors for players here
-                } else{
-                    console.log("The turn is odd");
+                turn ++;
+                x.style.backgroundColor = playColor;
+                boardState[col] += playColor[0];
+
+                //Check if one of the columns is full and disable the div accordingly
+                if (boardState[col].length == 6){
+                    id_string = "c"+col;
+                    let div = document.getElementById(id_string);
+                    div.onclick = " "; //remove onclick functionality 
+                    div.id = "disabled"+col; //alter id so the css no longer applies                    
+                }
+
+                //Check for vertical win. Only check last-altered column.
+                columnContent = boardState[col];
+                if (columnContent.indexOf("bbbb") > -1){
+                    winner = player1;
+                } else if (columnContent.indexOf("rrrr") > -1) {
+                    winner = player2;
                 }
                 
-                turn ++;
-                x.style.backgroundColor = "blue"; //Remove this when color implement above is done
-                stonesLimit[col]++;
-
-                //Check if one of the columns is full
-                if (stonesLimit[col] == 6){
-                    //Disable the column div here so it can no longer be clicked
+                //Check for horizontal win. Only check to the left and right of the last altered column.
+                let rowContent="";
+                for (var i=0; i < numberOfColumns; i++){
+                    rowContent += boardState[i][5-rowNr];
+                }
+                if (rowContent.indexOf("bbbb") > -1){
+                    winner = player1;
+                } else if (rowContent.indexOf("rrrr") > -1) {
+                    winner = player2;
                 }
 
-                //Check if there is a winner after this?
+                if (winner != "noone"){
+                    document.getElementById("whoseturn").innerHTML = winner+" wins! Congratulations!";
+                    disableAllButtons();
+                } else{
+                    //Re-run setPlayer to change whose turn it is and which color plays
+                    setPlayer();
+                }
             }
+
+            function disableAllButtons(){
+                for (var i=0; i < numberOfColumns; i++){
+                    id_string = "c"+i;
+                    let div = document.getElementById(id_string);
+                    div.onclick = " "; //remove onclick functionality 
+                    div.id = "disabled"+i; //alter id so the css no longer applies   
+                }
+            }
+
         </script>
     </body>
 </html>
