@@ -91,6 +91,9 @@
                 border-spacing: 5px;
             }
 
+            /* table.col1 or table.colgroup1 (if made as column groups above) does not work. 
+            That's why I was forced to make floating buttons with divs*/
+
             div#c0{
                 position: absolute;
                 height: 204px;
@@ -212,6 +215,7 @@
                     winner = player2;
                 }
 
+                //Check for win condition
                 if (winner != "noone"){
                     document.getElementById("whoseturn").innerHTML = winner+" wins! Congratulations!";
                     disableAllButtons();
